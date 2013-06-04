@@ -1,0 +1,11 @@
+#!/bin/sh
+name=$1
+cmd=$2
+if [ "$cmd" == "" ]; then
+    echo "Usage: confirm \"prompt text\" \"command to execute\""
+    exit
+fi
+zenity --question --text="Are you sure you want to ${name}?"
+if [ "$?" -eq 0 ]; then
+    $cmd
+fi
