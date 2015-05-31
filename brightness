@@ -1,13 +1,13 @@
 #!/bin/sh
 
 current=`cat /sys/class/backlight/gmux_backlight/brightness`
-if [ "$1" == "+" ]; then
+if [ "$1" = "up" ]; then
     max=`cat /sys/class/backlight/gmux_backlight/max_brightness`
     next=$((current+100))
     if [ $next -lt $max ]; then
         echo $next > /sys/class/backlight/gmux_backlight/brightness
     fi 
-elif [ "$1" == "-" ]; then
+elif [ "$1" = "down" ]; then
     next=$((current-100))
     if [ $next -gt 0 ]; then
         echo $next > /sys/class/backlight/gmux_backlight/brightness
@@ -15,5 +15,3 @@ elif [ "$1" == "-" ]; then
 else
     echo "Unrecognized option. Expected + or - as command line argument"
 fi
-
-
